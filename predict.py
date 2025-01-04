@@ -14,7 +14,6 @@ df.set_index('year', inplace=True)
 # Aggregate Y1, Y2, Y3 by year
 time_series = df[['Y1', 'Y2', 'Y3']].groupby(df.index).mean()
 
-
 # Function to train SARIMA and forecast
 def forecast_sarima(series, end_year=2030, seasonal_order=(1, 1, 1, 12), order=(1, 1, 1)):
     # Train SARIMA model
