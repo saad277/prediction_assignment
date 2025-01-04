@@ -1,6 +1,4 @@
 # pip install pandas matplotlib seaborn openpyxl
-# https://visualstudio.microsoft.com/visual-cpp-build-tools/
-#pip install git+https://github.com/statsmodels/statsmodels.git
 
 import pandas as pd
 import matplotlib.pyplot as plt
