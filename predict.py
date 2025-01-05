@@ -41,8 +41,9 @@ time_series.index = time_series.index.to_timestamp()
 
 plt.figure(figsize=(12, 8))
 for col in ['Scope 1', 'Scope 2', 'Scope 3']:
-    plt.plot(time_series.index, time_series[col], label=f'Actual {col}')
-    plt.plot(forecasts[col].index.to_timestamp(), forecasts[col], label=f'Forecast {col}', linestyle='--')
+    plt.plot(time_series.index, time_series[col], label=f'Observed {col}')
+    plt.plot(forecasts[col].index.to_timestamp(), forecasts[col], label=f'Forecasted {col}')
+    
 
 plt.title('SARIMA Forecasts for Scope 1, Scope 2, Scope 3')
 plt.xlabel('Year')
