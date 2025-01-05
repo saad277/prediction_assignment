@@ -3,7 +3,7 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX
 import matplotlib.pyplot as plt
 
 # Load the Excel file
-file_path = "Prediction 1.xlsx"  # Update with your file path
+file_path = "Prediction Updated File.xlsx"  # Update with your file path
 df = pd.read_excel(file_path)
 
 df['year'] = pd.to_numeric(df['year'], errors='coerce').fillna(0).astype(int)
@@ -14,7 +14,7 @@ df.set_index('year', inplace=True)
 df.index = pd.PeriodIndex(df.index, freq='Y')
 
 # Aggregate Y1, Y2, Y3 by year
-time_series = df[['Y1', 'Y2', 'Y3']].groupby(df.index).mean()
+time_series = df[['Scope 1', 'Scope 2', 'Scope 3']].groupby(df.index).mean()
 
 # Function to train SARIMA and forecast
 def forecast_sarima(series, end_year=2030, seasonal_order=(1, 1, 1, 12), order=(1, 1, 1)):
@@ -33,20 +33,20 @@ def forecast_sarima(series, end_year=2030, seasonal_order=(1, 1, 1, 12), order=(
 # Forecast Y1, Y2, Y3 till 2030
 forecasts = {}
 seasonal_order = (1, 1, 1, 12)  # Seasonal parameters (adjust as needed)
-for col in ['Y1', 'Y2', 'Y3']:
+for col in ['Scope 1', 'Scope 2', 'Scope 3']:
     forecasts[col], _ = forecast_sarima(time_series[col], seasonal_order=seasonal_order)
 
 # Convert the PeriodIndex to DatetimeIndex for plotting
 time_series.index = time_series.index.to_timestamp()
 
 plt.figure(figsize=(12, 8))
-for col in ['Y1', 'Y2', 'Y3']:
+for col in ['Scope 1', 'Scope 2', 'Scope 3']:
     plt.plot(time_series.index, time_series[col], label=f'Actual {col}')
     plt.plot(forecasts[col].index.to_timestamp(), forecasts[col], label=f'Forecast {col}', linestyle='--')
 
-plt.title('SARIMA Forecasts for Y1, Y2, Y3')
+plt.title('SARIMA Forecasts for Scope 1, Scope 2, Scope 3')
 plt.xlabel('Year')
-plt.ylabel('Values')
+plt.ylabel('Intensity')
 plt.legend()
 plt.grid()
 plt.show()
